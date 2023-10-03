@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laiwo.tiaosao.mapper.UserMapper">
+  <!--添加-->
+  <insert id="save" parameterType="com.laiwo.tiaosao.model.User">
+    insert into user(user_name, wx_head_url,tel, wx_uid,company_name,label,invitationCode,role) values(#{user_name},#{wx_head_url},#{tel},#{wx_uid},#{company_name},#{label},#{invitationCode},#{role})
+  </insert>
+  <!--修改-->
+  <update id="update" parameterType="com.laiwo.tiaosao.model.User">
+    update  user set user_name=#{user_name},wx_head_url=#{wx_head_url},tel=#{tel},wx_uid=#{wx_uid},company_name=#{company_name},label=#{label},invitationCode=#{invitationCode} where id=#{id}
+  </update>
+  <!--删除-->
+  <delete id="delete" parameterType="int">
+    DELETE FROM user where id=#{uId}
+  </delete>
+  <!--查询-->
+  <select id="getUserByInviteCode" parameterType="String" resultType="com.laiwo.tiaosao.model.User">
+    SELECT id,user_name,wx_head_url,tel,wx_uid,company_name,label,invitationCode,role from user WHERE invitationCode=#{inviteCode}
+  </select>
+  <select id="getUser" parameterType="String" resultType="com.laiwo.tiaosao.model.User">
+    SELECT id,user_name,wx_head_url,tel,wx_uid,company_name,label,invitationCode,role from user WHERE wx_uid=#{wxUid}
+  </select>
+  <!--查询-->
+  <select id="queryUser" parameterType="int" resultType="com.laiwo.tiaosao.model.User">
+    SELECT id,user_name,wx_head_url,tel,wx_uid,company_name,label,invitationCode,role from user WHERE id=#{uid}
+  </select>
+  <!--查询-->
+  <select id="findAll" resultType="com.laiwo.tiaosao.model.User">
+    SELECT id,user_name,wx_head_url,tel,wx_uid,company_name,label,invitationCode,role from user
+  </select>
+  <select id="queryUserByRole" parameterType="int" resultType="com.laiwo.tiaosao.model.User">
+    SELECT id,user_name,wx_head_url,tel,wx_uid,company_name,label,invitationCode,role from user WHERE role=#{role}
+  </select>
+
+
+
+
+
+
+
+
+</mapper>
