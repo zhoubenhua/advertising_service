@@ -1,31 +1,22 @@
 package com.zbh.advertising_service.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.zbh.advertising_service.controller.common.BaseResponse;
 import com.zbh.advertising_service.model.AfterTaxSalaryEntiy;
 import com.zbh.advertising_service.utils.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.text.SimpleDateFormat;
-import java.util.*;
 
 /**
  * 税后计算器相关接口
  */
 @Controller
-@RequestMapping("/api/after_tax_salary")
+@RequestMapping("api/after_tax_salary")
 public class AfterTaxSalaryCalculatorController {
-    private final int publishGoodsMaxCountInDay = 3;//每天发布商品最高为3次
 
     @ResponseBody
-    @PostMapping("/calculatorIndividualIncomeTax")
-    public BaseResponse<String> calculatorIndividualIncomeTax(@RequestParam(value = "uid") int uid,
-                                          @RequestParam(value = "money") float money) {
+    @GetMapping("/calculatorIndividualIncomeTax")
+    public BaseResponse<String> calculatorIndividualIncomeTax(@RequestParam(value = "money") float money) {
         AfterTaxSalaryEntiy afterTaxSalary = new AfterTaxSalaryEntiy();
         afterTaxSalary.setPreTaxIncome(money);
         afterTaxSalary.setPersonPayEndowmentInsurance((float) (money * 0.08));// 计算养老保险,税率为8%
@@ -45,9 +36,7 @@ public class AfterTaxSalaryCalculatorController {
         afterTaxSalary.setIndividualIncomeTax(CommonUtil.calculatorIndividualIncomeTax(money - total));
         afterTaxSalary.setAfterTaxIncome(afterTaxSalary.getPreTaxIncome() - afterTaxSalary.getIndividualIncomeTax());
         BaseResponse response = new BaseResponse();
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("content",afterTaxSalary);
-        response.setData(jsonObject.toJSONString());
+        response.setData(afterTaxSalary);
 
         return response;
     }

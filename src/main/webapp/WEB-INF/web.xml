@@ -21,13 +21,14 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   <!--过滤器结束-->
+  <!--配置spring监听器结束-->
   <!--配置前端控制器开始-->
   <servlet>
     <servlet-name>springmvc</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:springmvc.xml</param-value>
+      <param-value>classpath*:springmvc.xml</param-value>
     </init-param>
     <!--用来标记是否在项目启动时就加在此servlet 0或正数表示容器在应用启动就加载这个servlet
     当是一个负数时或者没有指定时，则指示容器在该servlet被选择时才加载-->
