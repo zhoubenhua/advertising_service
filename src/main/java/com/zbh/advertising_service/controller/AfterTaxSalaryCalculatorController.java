@@ -1,8 +1,10 @@
 package com.zbh.advertising_service.controller;
 
-import com.tencent.wxcloudrun.util.CommonUtil;
 import com.zbh.advertising_service.controller.common.BaseResponse;
-import com.tencent.wxcloudrun.model.AfterTaxSalaryEntiy;
+import com.zbh.advertising_service.model.AfterTaxSalaryEntiy;
+import com.zbh.advertising_service.utils.CommonUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,12 +13,18 @@ import org.springframework.web.bind.annotation.*;
  * 税后计算器相关接口
  */
 @Controller
-@RequestMapping("api/after_tax_salary")
+@RequestMapping("/api/after_tax_salary")
 public class AfterTaxSalaryCalculatorController {
+    final Logger logger;
+
+    public AfterTaxSalaryCalculatorController() {
+        this.logger = LoggerFactory.getLogger(AfterTaxSalaryCalculatorController.class);
+    }
 
     @ResponseBody
     @GetMapping("/calculatorIndividualIncomeTax")
-    public BaseResponse<String> calculatorIndividualIncomeTax(@RequestParam(value = "money") float money) {
+    public BaseResponse<AfterTaxSalaryEntiy> calculatorIndividualIncomeTax(@RequestParam(value = "money") float money) {
+        logger.info("/api/after_tax_salary");
         AfterTaxSalaryEntiy afterTaxSalary = new AfterTaxSalaryEntiy();
         afterTaxSalary.setPreTaxIncome(money);
         afterTaxSalary.setPersonPayEndowmentInsurance((float) (money * 0.08));// 计算养老保险,税率为8%
@@ -35,9 +43,7 @@ public class AfterTaxSalaryCalculatorController {
         afterTaxSalary.getPersonPayHousingFund();
         afterTaxSalary.setIndividualIncomeTax(CommonUtil.calculatorIndividualIncomeTax(money - total));
         afterTaxSalary.setAfterTaxIncome(afterTaxSalary.getPreTaxIncome() - afterTaxSalary.getIndividualIncomeTax());
-        BaseResponse response = new BaseResponse();
-        response.setData(afterTaxSalary);
-
+        BaseResponse<AfterTaxSalaryEntiy> response = BaseResponse.success(afterTaxSalary);
         return response;
     }
 

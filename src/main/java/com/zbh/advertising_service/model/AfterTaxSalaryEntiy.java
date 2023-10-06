@@ -1,4 +1,4 @@
-package com.tencent.wxcloudrun.model;
+package com.zbh.advertising_service.model;
 
 import java.io.Serializable;
 

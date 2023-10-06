@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan(basePackages = {"com.tencent.wxcloudrun.dao"})
 public class WxCloudRunApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(WxCloudRunApplication.class, args);
-    }
+//    public static void main(String[] args) {
+//      //  SpringApplication.run(WxCloudRunApplication.class, args);
+//    }
 }
