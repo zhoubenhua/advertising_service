@@ -1,4 +1,4 @@
-package com.zbh.advertising_service.utils;
+package com.tencent.wxcloudrun.util;
 
 public class CommonUtil {
     /**

@@ -1,9 +1,11 @@
-package com.zbh.advertising_service.model;
+package com.tencent.wxcloudrun.model;
+
+import java.io.Serializable;
 
 /**
  * 税后工资
  */
-public class AfterTaxSalaryEntiy {
+public class AfterTaxSalaryEntiy implements Serializable {
 
     /**
      * 个人付住房公积金
