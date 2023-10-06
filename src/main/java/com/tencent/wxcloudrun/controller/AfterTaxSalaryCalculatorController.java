@@ -16,10 +16,9 @@ public class AfterTaxSalaryCalculatorController {
     final Logger logger;
 
     public AfterTaxSalaryCalculatorController() {
-        this.logger = LoggerFactory.getLogger(CounterController.class);
+        this.logger = LoggerFactory.getLogger(AfterTaxSalaryCalculatorController.class);
     }
 
-    @ResponseBody
     @GetMapping(value = "/api/after_tax_salary")
     public ApiResponse calculatorIndividualIncomeTax(@RequestParam(value = "money") float money) {
         logger.info("/api/after_tax_salary");
